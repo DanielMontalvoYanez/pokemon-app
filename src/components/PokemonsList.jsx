@@ -43,6 +43,7 @@ function PokemonsList() {
         <div className="container-sm">
             <br></br>
             <div className='row justify-content-center shadow-lg p-3 mb-5 bg-body rounded'>
+                <h2>PokeApi</h2>
                 <div className="col-4">
                     <ol className='list-group list-group-flush'>
                         {
