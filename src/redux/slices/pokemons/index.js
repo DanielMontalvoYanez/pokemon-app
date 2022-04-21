@@ -11,19 +11,21 @@ export const pokemonsSlice = createSlice({
     setPokemonsList: (state, action) => {
       state.list = action.payload;
     },
-    setPokemonById: (state, action) => {
+    getPokemonById: (state, action) => {
       state.pokemonById = action.payload;
     },
   },
 });
 
-export const { setPokemonsList, setPokemonById } = pokemonsSlice.actions;
+export const { setPokemonsList, getPokemonById } = pokemonsSlice.actions;
 export default pokemonsSlice.reducer;
 
 export const fetchPokemons = (numPage) => {
   return (dispatch) => {
+    const perPage = 20;
+    const offset = numPage * perPage - perPage;
     axios
-      .get('https://pokeapi.co/api/v2/pokemon/?limit=20&offset=' + numPage)
+      .get('https://pokeapi.co/api/v2/pokemon/?limit=20&offset=' + offset)
       .then((response) => {
         dispatch(setPokemonsList(response.data));
       })
@@ -33,12 +35,12 @@ export const fetchPokemons = (numPage) => {
   };
 };
 
-export const fetchPokemonById = (id = 1) => {
+export const fetchPokemonById = (id) => {
   return (dispatch) => {
     axios
       .get('https://pokeapi.co/api/v2/pokemon/' + id)
       .then((response) => {
-        dispatch(setPokemonById(response.data));
+        dispatch(getPokemonById(response.data));
       })
       .catch((error) => {
         console.log('error', error);

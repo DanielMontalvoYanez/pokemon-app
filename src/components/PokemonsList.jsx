@@ -7,12 +7,13 @@ import { useNavigate } from 'react-router-dom';
 function PokemonsList() {
     const [currentCharacter, setCurrentCharacter] = useState(1);
     const [details, setDetails] = useState([]);
-    const [page, setPage] = useState(0);
+    const [page, setPage] = useState(1);
     let navigate = useNavigate();
 
     const { list: pokemones } = useSelector((state) => state.pokemons);
     const { pokemonById: pokemon } = useSelector((state) => state.pokemons);
     const dispatch = useDispatch();
+
     useEffect(() => {
         dispatch(fetchPokemons(page));
     }, [page])
@@ -24,12 +25,7 @@ function PokemonsList() {
 
     const onChangePage = (numPage) => {
         if (!pokemones.previous && page + numPage <= 0) return;
-        if (pokemones.next && page + numPage >= 8) return;
-        // const perPage = 20;
-        // const offset = (numPage * perPage) - perPage;
-        /*1 = 0 0 1*15 - 15 = 0;
-        2 = 15 2*15 - 15 =15;
-        3 = 30 3*15 - 15 = 30*/
+        if (page + numPage >= 9) return;
         setPage(page + numPage)
     }
 

@@ -13,7 +13,7 @@ const PokemonDetails = () => {
                     <div className="card-header">
                         <h5 className="card-title">{pokemon.name}</h5>
                     </div>
-                    <img src={pokemon?.sprites?.front_default} className="card-img-top" alt="..." />
+                    <img src={pokemon?.sprites?.front_default} className="card-img-top" alt={pokemon.name} />
                     <div className="card-body">
                         <p className="card-text">height : {pokemon.height}</p>
                         <p className="card-text">weight : {pokemon.weight}</p>
