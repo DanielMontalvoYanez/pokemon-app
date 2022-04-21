@@ -1,11 +1,10 @@
 import React from 'react'
+import { NavLink } from 'react-router-dom'
 
 function Navbar() {
     return (
         <nav className="Navbar">
-            <div className='container'>
-                <a className='nav' href="/">React redux</a>
-            </div>
+            <NavLink to={'/'}>Home</NavLink>
         </nav>
     )
 }

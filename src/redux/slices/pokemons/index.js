@@ -25,7 +25,6 @@ export const fetchPokemons = (numPage) => {
     axios
       .get('https://pokeapi.co/api/v2/pokemon/?limit=20&offset=' + numPage)
       .then((response) => {
-        console.log('res', response.data);
         dispatch(setPokemonsList(response.data));
       })
       .catch((error) => {
