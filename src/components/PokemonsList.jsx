@@ -1,7 +1,7 @@
 import React, { useEffect, useState } from 'react';
 import { fetchPokemons, fetchPokemonById } from '../redux/slices/pokemons';
 import { useDispatch, useSelector } from 'react-redux';
-import { Link, useNavigate } from 'react-router-dom';
+import { useNavigate } from 'react-router-dom';
 
 
 function PokemonsList() {
@@ -44,30 +44,41 @@ function PokemonsList() {
 
 
     return (
-        <div className="container">
-            <div className='row'>
-                <ol>
-                    {
-                        pokemones?.results?.map((character, index) => (
-                            <li key={index} className="col-sm" onClick={(e) => showDetails(character, e)}>
-                                {character.name}
-                            </li>
-                        ))
-                    }
-                </ol>
+        <div className="container-sm">
+            <br></br>
+            <div className='row justify-content-center shadow-lg p-3 mb-5 bg-body rounded'>
+                <div className="col-4">
+                    <ol className='list-group list-group-flush'>
+                        {
+                            pokemones?.results?.map((character, index) => (
+                                <li key={index} className="list-group-item" onClick={(e) => showDetails(character, e)}>
+                                    {character.name}
+                                </li>
+                            ))
+                        }
+                    </ol>
+                </div>                
+                {
+                    details && (
+                        <div className="col-2 align-self-center">
+                            <div className="card shadow p-3 mb-5 bg-body rounded" style={{ width: "12rem" }}>
+                                <img src={details?.sprites?.front_default} className="card-img-top" alt={details.name} />
+                            </div>
+                        </div>
+                    )
+                }
             </div>
-            <section>
-                <button onClick={() => onChangePage(-1)}>Prev</button>
-                <p>Pagina : {page}</p>
-                <button onClick={() => onChangePage(1)}>Next</button>
-            </section>
-            {
-                details && (
-                    <aside>
-                        <img src={details?.sprites?.front_default} alt={details.name} />
-                    </aside>
-                )
-            }
+            <div className='row justify-content-center shadow-lg p-3 mb-5 bg-body rounded'>
+                <div className="col-2">
+                    <button className="btn btn-outline-info" onClick={() => onChangePage(-1)}>Prev</button>
+                </div>
+                <div className="col-2">
+                    Pagina : {page}
+                </div>
+                <div className="col-2">
+                    <button className="btn btn-outline-info" onClick={() => onChangePage(1)}>Next</button>
+                </div>
+            </div>
         </div>
     )
 }
